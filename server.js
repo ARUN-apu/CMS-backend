@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const authRoutes = require("./routes/authRoutes");
+const courseRoutes = require("./routes/courseRoutes");
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/courses", courseRoutes);
 
 app.get("/", (req, res) => {
     res.send("CMS Backend is running...");
