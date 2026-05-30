@@ -15,15 +15,15 @@ const enrollmentSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    completedLessons: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Lesson"
-        }
-    ],
-    isCompleted: {
+    completed: {
         type: Boolean,
         default: false
+    },
+    progress: {
+        type: Number,
+        default: 0,
+        min: 0,
+        max: 100
     }
 }, { timestamps: true });
 
