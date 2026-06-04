@@ -101,4 +101,17 @@ const deleteCourse = async (req, res) => {
     }
 };
 
-module.exports = { createCourse, getAllCourses, getCourseById, updateCourse, deleteCourse };
+const getMyCourses = async (req, res) => {
+    try {
+        const courses = await Course.find({
+            instructor: req.user.id,
+            isDeleted: false
+        }).sort({ createdAt: -1 });
+
+        res.status(200).json({ courses });
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+module.exports = { createCourse, getAllCourses, getCourseById, updateCourse, deleteCourse, getMyCourses };

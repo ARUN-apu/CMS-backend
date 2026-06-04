@@ -5,12 +5,14 @@ const {
     getAllCourses,
     getCourseById,
     updateCourse,
-    deleteCourse
+    deleteCourse,
+    getMyCourses
 } = require("../controllers/courseController");
 const { protect, authorizeRoles } = require("../middleware/authMiddleware");
 
 router.get("/", getAllCourses);
 router.get("/:id", getCourseById);
+router.get("/my-courses", protect, authorizeRoles("instructor", "admin"), getMyCourses);
 router.post("/", protect, authorizeRoles("instructor", "admin"), createCourse);
 router.put("/:id", protect, authorizeRoles("instructor", "admin"), updateCourse);
 router.delete("/:id", protect, authorizeRoles("instructor", "admin"), deleteCourse);
